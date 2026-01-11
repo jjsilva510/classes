@@ -37,6 +37,37 @@ Building your own signing device isn't just about saving money—it's about unde
 
 ## Concept Primer (15 min)
 
+### What is Self-Custody and Why Does it Matter?
+Bitcoin was created to remove the need for trusted third parties, like banks and corporations from our money system. Instead of using trust, bitcoin uses math, physics, and cryptography to allow anyone the power to own and control their money without needing anyone’s permission.
+
+The way this works is that bitcoin exists on a global digital ledger called the blockchain aka the bitcoin timechain, which is a public and transparent ledger run by computers, instead of a centralized ledger like a bank account. 
+
+The important thing to understand is that in order to move bitcoin from one place to another, you have to sign that transaction with what's called a private key. Think of it like unlocking a vault with a password, and moving the bitcoin to someone else's vault. Bitcoin gives you the power to hold the keys to that vault yourself, instead of relying on a bank to move your money for you. 
+
+With great power comes great responsibility, lose your keys and your funds are gone forever. In this way, you can think of the keys to the vault as the money itself. While keys are not the same thing as bitcoin, they are the mechanism to move your funds and are therefore extremely important to protect. This is why we say "not your keys, not your coins". 
+
+The term self-custody might sound confusing, but all it means is holding your own private keys, and controlling your own bitcoin. If you don’t hold that key, you’re trusting someone else to hold it for you. If your bitcoin is in an ETF or on an exchange (Mt. Gox, FTX, Coinbase, Binance, etc.), you don’t own bitcoin, you own a claim to bitcoin. This introduces all kinds of risks, like exchanges getting hacked and losing your bitcoin or companies lending out your money and giving you only a fraction in reserve. Additionally trusted third parties would have full control of your money and could limit or freeze withdrawals. 
+
+<img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/3c52f49e-0c49-4937-bac7-b6c91238e822" />
+
+With self-custody you remove trust from the equation. No one can freeze your funds or deny a transaction, you can send money across borders, to anyone, at any time, and you don’t need a bank account, an ID, or anyone’s approval. No one can stop you, censor you, or steal from you, unlocking the full power of bitcoin as freedom money. This is why we say, with bitcoin you can be your own bank. 
+
+Bitcoin was created to solve the problem of the manipulation of trust and money, an opt out of our current system, but the exit only works if you take the keys. This is why self-custody is so important. 
+
+### What is a Wallet?
+The term wallet is a bit of a misnomer and therefore can be confusing. Yes it's true that a bitcoin wallet, like a physical wallet, stores value. But the main difference is that bitcoin wallets don't actually store any bitcoin. 
+
+Bitcoin only exists as a ledger entry on the public blockchain, or within the metaphorical vaults in cyberspace. Remember to move bitcoin you have to use your keys to unlock the vault and move the coins somewhere else, the private keys are what is used spend bitcoin. When you make a transaction with your wallet, you're really just using your keys to sign the transaction. This is how you show proof that you own the money and have the right to spend those coins. 
+
+Bitcoin wallets really just store your private keys, so it would be more accurate to call them keychains. 
+
+### Hot vs Cold Wallets
+A hot wallet is a software app on your phone or computer. It’s connected to the internet, so it’s easier to use and quicker to sign transactions, but this also means it's more exposed to hackers, malware, and phishing. It's called "hot" because it's connected to the internet, is plugged in and powered on. An example would be a phone wallet or a browser wallet. 
+
+<img width="600" height="337" alt="image" src="https://github.com/user-attachments/assets/a7cfe81b-462a-4b00-bb66-2221985e5365" />
+
+On the other hand a cold wallet, or hardware wallet, is a device that creates and stores your key offline. This removes the ability for someone to hack your funds and is much safer for long-term savings, however it's a device that is needed to sign every transaction and can be less convenient.
+
 ### Hardware Wallet Threat Model
 Hardware wallets exist to solve a fundamental problem: how do you sign Bitcoin transactions without exposing your private keys to an internet-connected computer that could be compromised by malware or remote attackers? The core threat model assumes your everyday laptop or phone is potentially hostile. A hardware wallet creates an isolated environment where private keys never leave the device, and transaction signing happens in a secure element or microcontroller that only communicates the signature back to the host computer, not the key itself. Even if your computer is completely compromised, an attacker can't steal your Bitcoin without physical access to the device and your PIN.
 
@@ -61,7 +92,7 @@ Today, we'll be flashing their firmware onto a $15 hardware instead.
 
 ![LilyGO T-Display development board](../assets/LILYGO-T-DISPLAY.jpg){ width="70%" }
 
-- **LilyGO T-Display (16MB with shell, model K164)** — [Order direct from LilyGO](https://lilygo.cc/products/t-display?srsltid=AfmBOornob5U3FzZifuSwBBOdeXKcdPDqkYEnAVYKBLdzl0BPyNglGBR) for about $15. This ESP32 board provides the display, buttons, and USB interface that mirror Blockstream's Jade Plus. The onboard ESP32 also includes Wi-Fi and Bluetooth radios; we'll ship firmware that keeps them disabled, but they shape your threat model because malicious code could switch them back on.
+- **LilyGO T-Display (16MB with shell, model K164)** — [Order direct from LilyGO](https://lilygo.cc/products/t-display?srsltid=AfmBOornob5U3FzZifuSwBBOdeXKcdPDqkYEnAVYKBLdzl0BPyNglGBR) for about $15. This ESP32 board provides the display, buttons, and USB interface that mirror Blockstream's Jade Plus. The onboard ESP32 also includes Wi-Fi and Bluetooth radios; we won't be disabling those capabilities in this class, but it is possible to disable them with other firmware updates. Additional capabilities for your hardware wallet expand so your threat surface area, so keep that in mind when selecting a hardware wallet.
 - **USB-C cable** — Bring a data-capable cable so you can flash firmware and power the board straight from your laptop (totally fine for class use).
 
 ### Why Build Your Own Hardware Wallet?
@@ -243,6 +274,41 @@ Before you can see your balance or broadcast transactions, Sparrow needs to conn
 
 For this workshop, using a **Public Electrum Server** is perfectly fine for testnet transactions. In a production environment with real funds, you'd want to consider running your own node or using a trusted private server for maximum privacy.
 
+#### Option 3: Blockstream Green Desktop App (Quick Start)
+
+Blockstream Green is the software to finish setting up the JadeDIY and it must be with the desktop version
+
+1. Get the official Blockstream application — this is the link to it from their website. When you're there click [Download now](https://blockstream.com/app/).
+   ![Blockstream website](<../assets/blockstream website.jpg>)
+
+2. Depending on where your downloads go, most likely the file will be in your Downloads folder. Check there and double-click the executable file to install the software.
+   ![Downloads folder example](<../assets/downloads folder.png>)
+
+3. You might have to give admin rights to run the installer. Once you do, a window will pop up that should look like the following picture — click **Next**.
+   ![Blockstream installer step 1](<../assets/blockstream install1.png>)
+
+4. Choose where you want the installed application to reside (a location with your other programs or somewhere easy to find), then click **Next**.
+   ![Blockstream installer step 2](<../assets/blockstream install2.png>)
+
+5. The installer will ask for a shortcut name. Enter one or keep the default, then click **Next**.
+   ![Blockstream installer step 3](<../assets/blockstream install3.png>)
+
+6. If you want a desktop shortcut, check the box; otherwise click **Next**.
+   ![Blockstream installer step 4](<../assets/blockstream install4.png>)
+
+7. Finally, click **Install** and wait a few minutes for the installation to complete.
+   ![Blockstream installer installing](<../assets/blockstream install5.png>)
+
+8. The progress bar should fill to the end.
+   ![Blockstream installer progress](<../assets/blockstream install6.png>)
+
+9. When it finishes, a new page will appear — click **Finish**.
+   ![Blockstream installer finish](<../assets/blockstream install7.png>)
+
+10. Find your newly installed Blockstream application (example shown in the Windows 11 Start menu).
+   ![Blockstream in Start menu](<../assets/blockstream install8.png>)
+
+11. Once you find it, click to launch — a splash screen should appear.
 ### Verifying Your Setup
 
 Once connected to Sparrow (or another wallet application):
@@ -252,6 +318,8 @@ Once connected to Sparrow (or another wallet application):
 2. **Generate a receiving address:** Click the **Receive** tab in Sparrow and copy your first Bitcoin receiving address. 
 
 3. **Ready for transactions:** Your hardware wallet is now fully configured and ready to receive and sign Bitcoin transactions. Proceed to the next section to practice signing a testnet transaction.
+
+
 
 ---
 
